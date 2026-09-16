@@ -1,0 +1,129 @@
+.spada-buy-now-loading {
+	position: relative !important;
+	opacity: .72 !important;
+	pointer-events: none !important;
+	cursor: wait !important;
+}
+.spada-buy-now-loading::after {
+	content: "";
+	display: inline-block;
+	width: 15px;
+	height: 15px;
+	margin-left: 9px;
+	vertical-align: -2px;
+	border: 2px solid currentColor;
+	border-right-color: transparent;
+	border-radius: 50%;
+	animation: spada-buy-now-spin .7s linear infinite;
+}
+.spada-buy-now-disabled,
+.spada-buy-now:disabled,
+.spada-buy-now[aria-disabled="true"] {
+	opacity: .5 !important;
+	cursor: not-allowed !important;
+	pointer-events: none !important;
+}
+.spada-buy-now-variation {
+	display: none;
+	position: relative;
+	width: 100%;
+	margin: 0 0 10px;
+	font-family: Helvetica, Arial, sans-serif;
+}
+.spada-buy-now-variation.is-open {
+	display: block;
+}
+.spada-buy-now-variation .variations_form {
+	margin: 0;
+}
+.spada-buy-now-variation .variations {
+	width: 100%;
+	margin: 0 !important;
+	border: 0 !important;
+	border-collapse: collapse;
+}
+.spada-buy-now-variation .variations tr,
+.spada-buy-now-variation .variations th,
+.spada-buy-now-variation .variations td {
+	border: 0 !important;
+}
+.spada-buy-now-variation .variations th {
+	display: none;
+}
+.spada-buy-now-variation .variations td {
+	display: block;
+	padding: 0 !important;
+}
+.spada-buy-now-variation .variations td.value {
+	position: relative;
+}
+.spada-buy-now-variation .variations select {
+	width: 100% !important;
+	min-height: 44px;
+	margin: 0 !important;
+	padding: 8px 38px 8px 13px !important;
+	border: 1px solid #d7e1e3 !important;
+	border-radius: 8px !important;
+	background: #fff !important;
+	color: #263238 !important;
+	font-family: Helvetica, Arial, sans-serif !important;
+	font-size: 15px !important;
+	line-height: 1.35;
+	outline: none !important;
+	box-shadow: none !important;
+	cursor: pointer;
+}
+.spada-buy-now-variation .variations select:focus {
+	border-color: #00A9BB !important;
+	box-shadow: 0 0 0 2px rgba(0,169,187,.1) !important;
+}
+.spada-buy-now-variation .reset_variations,
+.spada-buy-now-variation .single_variation_wrap,
+.spada-buy-now-variation .quantity,
+.spada-buy-now-variation .single_add_to_cart_button {
+	display: none !important;
+}
+.spada-buy-now-variation .woocommerce-variation-description,
+.spada-buy-now-variation .woocommerce-variation-price,
+.spada-buy-now-variation .woocommerce-variation-availability {
+	display: none !important;
+}
+.spada-buy-now-selector-placeholder {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 8px;
+	min-height: 44px;
+	padding: 8px 13px;
+	border: 1px solid #d7e1e3;
+	border-radius: 8px;
+	background: #fff;
+	color: #7c8c91;
+	font: 14px/1.35 Helvetica, Arial, sans-serif;
+}
+.spada-buy-now-spinner {
+	display: inline-block;
+	width: 15px;
+	height: 15px;
+	border: 2px solid #c8d9dc;
+	border-top-color: #00A9BB;
+	border-radius: 50%;
+	animation: spada-buy-now-spin .7s linear infinite;
+}
+.spada-buy-now-selector-loading .variations select {
+	pointer-events: none;
+}
+.spada-buy-now-selector-error {
+	padding: 8px 13px;
+	border: 1px solid #ead1d1;
+	border-radius: 8px;
+	background: #fff;
+	color: #9a4545;
+	font: 14px/1.35 Helvetica, Arial, sans-serif;
+}
+.spada-buy-now-variation.spada-buy-now-unavailable .variations select {
+	border-color: #e2bcbc !important;
+}
+@keyframes spada-buy-now-spin {
+	to { transform: rotate(360deg); }
+}
