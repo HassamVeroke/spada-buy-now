@@ -1,5 +1,7 @@
 .spada-buy-now-loading {
 	position: relative !important;
+	box-sizing: border-box !important;
+	overflow: hidden !important;
 	opacity: .72 !important;
 	pointer-events: none !important;
 	cursor: wait !important;
@@ -11,12 +13,14 @@
 .spada-buy-now-loading::after {
 	content: "";
 	position: absolute;
-	top: 50%;
-	right: 16px;
+	top: 50% !important;
+	right: 12px !important;
 	display: block;
 	width: 15px;
 	height: 15px;
-	margin-top: -7.5px;
+	margin-top: 0;
+	transform: translateY(-50%);
+	box-sizing: border-box;
 	border: 2px solid currentColor;
 	border-right-color: transparent;
 	border-radius: 50%;
@@ -44,7 +48,10 @@
 }
 .spada-buy-now-variation .variations_form {
 	margin-top: 25px;
-	margin-bottom: 0;
+	margin-bottom: 0 !important;
+}
+.spada-buy-now-variation .spada-buy-now-selector-placeholder {
+	margin-top: 25px;
 }
 .spada-buy-now-variation .blockUI,
 .spada-buy-now-variation .blockOverlay,
@@ -138,6 +145,16 @@
 }
 .spada-buy-now-variation.spada-buy-now-unavailable .variations select {
 	border-color: #e2bcbc !important;
+}
+.spada-buy-now .elementor-button-text img,
+.spada-buy-now img {
+	display: inline-block !important;
+	width: 18px !important;
+	height: 1em !important;
+	max-width: 18px !important;
+	object-fit: contain;
+	vertical-align: -0.12em;
+	margin: 0 3px 0 0 !important;
 }
 @keyframes spada-buy-now-spin {
 	to { transform: rotate(360deg); }

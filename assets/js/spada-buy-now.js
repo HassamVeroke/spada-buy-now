@@ -342,6 +342,7 @@ jQuery(function ($) {
 		}
 
 		currentProductId = productId;
+		$button.trigger('blur');
 		// If this is already an opened/loaded variation selector, the button is now the Buy Now action.
 		var $container = $button.siblings('.spada-buy-now-variation');
 		if ($container.length && $container.data('loaded') === true) {
