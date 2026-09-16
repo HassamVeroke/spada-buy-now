@@ -76,22 +76,12 @@ jQuery(function ($) {
 		var decimalSeparator = settings.decimalSeparator || '.';
 		var thousandSeparator = settings.thousandSeparator || ',';
 		var symbol = settings.htmlSymbol || escapeHtml(settings.symbol || '');
-		var position = settings.position || 'left';
 
 		var number = price.toFixed(decimals).split('.');
 		number[0] = number[0].replace(/\B(?=(\d{3})+(?!\d))/g, thousandSeparator);
 		var formattedNumber = number.join(decimalSeparator);
 
-		if (position === 'right') {
-			return formattedNumber + symbol;
-		}
-		if (position === 'right_space') {
-			return formattedNumber + ' ' + symbol;
-		}
-		if (position === 'left_space') {
-			return symbol + ' ' + formattedNumber;
-		}
-		return symbol + formattedNumber;
+		return symbol ? symbol + ' ' + formattedNumber : formattedNumber;
 	}
 
 	function escapeHtml(value) {
