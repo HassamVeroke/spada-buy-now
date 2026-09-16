@@ -81,6 +81,8 @@ class Spada_Buy_Now {
 					'buyNow'           => __( 'Buy Now', 'spada-buy-now' ),
 					'selectOptions'    => __( 'Select Options', 'spada-buy-now' ),
 					'buyNowFor'        => __( 'Buy Now for %s', 'spada-buy-now' ),
+					'outOfStock'       => __( 'Out of Stock', 'spada-buy-now' ),
+					'unavailable'      => __( 'Unavailable', 'spada-buy-now' ),
 					'selectVariation'  => __( 'Please select all available options.', 'spada-buy-now' ),
 					'notAvailable'     => __( 'This variation is not available.', 'spada-buy-now' ),
 					'error'            => __( 'Something went wrong. Please try again.', 'spada-buy-now' ),
