@@ -154,6 +154,21 @@ jQuery(function ($) {
 		$container.attr('aria-busy', loading ? 'true' : 'false');
 	}
 
+	function focusVariationSelect($container, openPicker) {
+		var $select = $container.find('.variations select').first();
+		if (!$select.length) {
+			return;
+		}
+
+		$select.trigger('focus');
+		if (openPicker && $select[0] && typeof $select[0].showPicker === 'function') {
+			try {
+				$select[0].showPicker();
+			} catch (error) {
+			}
+		}
+	}
+
 	function getInlineContainer($button) {
 		var $existing = $button.siblings('.spada-buy-now-variation');
 		if ($existing.length) {
@@ -202,6 +217,7 @@ jQuery(function ($) {
 		if ($container.data('loaded') === true) {
 			$container.addClass('is-open');
 			setButtonLoading($button, false);
+			focusVariationSelect($container, true);
 			return;
 		}
 
@@ -241,6 +257,7 @@ jQuery(function ($) {
 			// Let the browser paint the returned select before restoring the button text.
 			window.requestAnimationFrame(function () {
 				setButtonLoading($button, false);
+				focusVariationSelect($container, true);
 			});
 		}).fail(function () {
 			$container.html('<div class="spada-buy-now-selector-error">' + SpadaBuyNow.strings.error + '</div>');
