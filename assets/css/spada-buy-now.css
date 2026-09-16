@@ -27,14 +27,22 @@
 	display: none;
 	position: relative;
 	width: 100%;
-	margin: 0 0 10px;
+	margin: 0 !important;
 	font-family: Helvetica, Arial, sans-serif;
+}
+.spada-buy-now-variation + .spada-buy-now {
+	margin-top: 0 !important;
 }
 .spada-buy-now-variation.is-open {
 	display: block;
 }
 .spada-buy-now-variation .variations_form {
 	margin: 0;
+}
+.spada-buy-now-variation .blockUI,
+.spada-buy-now-variation .blockOverlay,
+.spada-buy-now-variation .loader {
+	display: none !important;
 }
 .spada-buy-now-variation .variations {
 	width: 100%;

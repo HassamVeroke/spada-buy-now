@@ -70,7 +70,7 @@ jQuery(function ($) {
 		var decimals = typeof settings.decimals !== 'undefined' ? parseInt(settings.decimals, 10) : 2;
 		var decimalSeparator = settings.decimalSeparator || '.';
 		var thousandSeparator = settings.thousandSeparator || ',';
-		var symbol = settings.symbol || '';
+		var symbol = settings.htmlSymbol || escapeHtml(settings.symbol || '');
 		var position = settings.position || 'left';
 
 		var number = price.toFixed(decimals).split('.');
@@ -89,8 +89,16 @@ jQuery(function ($) {
 		return symbol + formattedNumber;
 	}
 
+	function escapeHtml(value) {
+		return $('<div>').text(value).html();
+	}
+
 	function setButtonText($button, text) {
 		getButtonTextElement($button).text(text);
+	}
+
+	function setButtonHtml($button, html) {
+		getButtonTextElement($button).html(html);
 	}
 
 	function setVariableSelectOptionsText($button) {
@@ -108,7 +116,9 @@ jQuery(function ($) {
 			return;
 		}
 
-		setButtonText($button, SpadaBuyNow.strings.buyNowFor.replace('%s', formattedPrice));
+		var labelParts = (SpadaBuyNow.strings.buyNowFor || 'Buy Now for %s').split('%s');
+		var label = escapeHtml(labelParts.shift()) + formattedPrice + escapeHtml(labelParts.join('%s'));
+		setButtonHtml($button, label);
 		$button.attr('data-spada-variable-state', 'ready');
 	}
 

@@ -41,6 +41,8 @@ class Spada_Buy_Now {
 			return;
 		}
 
+		$currency_symbol = get_woocommerce_currency_symbol();
+
 		wp_enqueue_script( 'wc-add-to-cart' );
 		wp_enqueue_script( 'wc-add-to-cart-variation' );
 
@@ -68,7 +70,21 @@ class Spada_Buy_Now {
 				'nonce'      => wp_create_nonce( 'spada_buy_now' ),
 				'checkoutUrl'=> wc_get_checkout_url(),
 				'currency'    => array(
-					'symbol'           => get_woocommerce_currency_symbol(),
+					'symbol'           => wp_strip_all_tags( $currency_symbol ),
+					'htmlSymbol'       => wp_kses(
+						$currency_symbol,
+						array(
+							'img' => array(
+								'src'     => true,
+								'alt'     => true,
+								'class'   => true,
+								'height'  => true,
+								'loading' => true,
+								'style'   => true,
+								'width'   => true,
+							),
+						)
+					),
 					'position'         => get_option( 'woocommerce_currency_pos', 'left' ),
 					'decimals'         => wc_get_price_decimals(),
 					'decimalSeparator'  => wc_get_price_decimal_separator(),
