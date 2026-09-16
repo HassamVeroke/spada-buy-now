@@ -130,6 +130,9 @@ class Spada_Buy_Now {
 				'type'        => $product->is_type( 'variable' ) ? 'variable' : 'simple',
 				'in_stock'    => $product->is_in_stock(),
 				'purchasable' => $product->is_purchasable(),
+				'price_html'  => $product->is_type( 'simple' ) && '' !== $product->get_price()
+					? wp_kses_post( wc_price( $product->get_price() ) )
+					: '',
 			)
 		);
 	}

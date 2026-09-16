@@ -11,16 +11,14 @@
 	visibility: hidden !important;
 }
 .spada-buy-now-loading::after {
-	content: "";
-	position: absolute;
-	top: 50% !important;
-	right: 12px !important;
-	display: block;
-	width: 15px;
-	height: 15px;
-	margin-top: 0;
-	transform: translateY(-50%);
-	box-sizing: border-box;
+	display: none !important;
+}
+.spada-buy-now-inline-spinner {
+	display: inline-block;
+	width: 14px;
+	height: 14px;
+	margin-left: 8px;
+	vertical-align: -2px;
 	border: 2px solid currentColor;
 	border-right-color: transparent;
 	border-radius: 50%;

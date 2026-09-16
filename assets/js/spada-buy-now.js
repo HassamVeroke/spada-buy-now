@@ -101,6 +101,15 @@ jQuery(function ($) {
 		$button.attr('data-spada-variable-state', 'select');
 	}
 
+	function setSimpleBuyNowText($button, productInfo) {
+		if (!productInfo || !productInfo.price_html) {
+			return;
+		}
+
+		var label = escapeHtml(SpadaBuyNow.strings.buyNowFor.replace('%s', '')) + productInfo.price_html;
+		setButtonHtml($button, label);
+	}
+
 	function setVariableBuyNowText($button, variation) {
 		if (!variation || typeof variation.display_price === 'undefined') {
 			return;
@@ -129,13 +138,13 @@ jQuery(function ($) {
 		var $text = getButtonTextElement($button);
 		if ($text.length) {
 			if (loading) {
-				if (!$text.data('spada-loading-text')) {
-					$text.data('spada-loading-text', $text.text());
+				if (!$text.data('spada-loading-html')) {
+					$text.data('spada-loading-html', $text.html());
 				}
-				$text.text(loadingText || SpadaBuyNow.strings.loading);
-			} else if ($text.data('spada-loading-text')) {
-				$text.text($text.data('spada-loading-text'));
-				$text.removeData('spada-loading-text');
+				$text.html(escapeHtml(loadingText || SpadaBuyNow.strings.loading) + '<span class="spada-buy-now-inline-spinner" aria-hidden="true"></span>');
+			} else if ($text.data('spada-loading-html')) {
+				$text.html($text.data('spada-loading-html'));
+				$text.removeData('spada-loading-html');
 			}
 		}
 	}
@@ -290,6 +299,8 @@ jQuery(function ($) {
 			if (response.data.type === 'variable') {
 				// Variable products start with Select Options, not the parent price.
 				setVariableSelectOptionsText($button);
+			} else {
+				setSimpleBuyNowText($button, response.data);
 			}
 
 			$button.removeClass('spada-buy-now-disabled').prop('disabled', false).attr('aria-disabled', 'false');
@@ -383,6 +394,7 @@ jQuery(function ($) {
 
 			if (response.data.type === 'simple') {
 				setButtonLoading($button, false);
+				setSimpleBuyNowText($button, response.data);
 				addSimpleProduct(productId, $button);
 				return;
 			}
