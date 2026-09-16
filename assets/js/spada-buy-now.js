@@ -2,7 +2,6 @@ jQuery(function ($) {
 	'use strict';
 
 	var currentProductId = 0;
-	var activeButton = null;
 
 	$('.spada-buy-now').each(function () {
 		var $button = $(this);
@@ -12,9 +11,9 @@ jQuery(function ($) {
 		}
 
 		$button
-			.addClass('spada-buy-now-disabled')
-			.prop('disabled', true)
-			.attr('aria-disabled', 'true')
+			.removeClass('spada-buy-now-disabled')
+			.prop('disabled', false)
+			.attr('aria-disabled', 'false')
 			.attr('data-stock-checked', 'false');
 	});
 
@@ -60,7 +59,7 @@ jQuery(function ($) {
 	}
 
 	function formatVariationPrice(price) {
-		price = parseFloat(price);
+		price = parseFloat(String(price).replace(/[^0-9.-]/g, ''));
 		if (isNaN(price)) {
 			return '';
 		}
@@ -86,16 +85,6 @@ jQuery(function ($) {
 			return symbol + ' ' + formattedNumber;
 		}
 		return symbol + formattedNumber;
-	}
-
-	function getOriginalButtonText($button) {
-		var $text = getButtonTextElement($button);
-		var originalText = $text.data('spada-original-buy-text');
-		if (!originalText) {
-			originalText = $text.text().trim();
-			$text.data('spada-original-buy-text', originalText);
-		}
-		return originalText;
 	}
 
 	function setButtonText($button, text) {
@@ -196,6 +185,7 @@ jQuery(function ($) {
 
 		if ($container.data('loaded') === true) {
 			$container.addClass('is-open');
+			setButtonLoading($button, false);
 			return;
 		}
 
@@ -217,6 +207,7 @@ jQuery(function ($) {
 		}).done(function (response) {
 			if (!response.success || !response.data.html) {
 				$container.html('<div class="spada-buy-now-selector-error">' + SpadaBuyNow.strings.error + '</div>');
+				setButtonLoading($button, false);
 				return;
 			}
 
@@ -230,18 +221,30 @@ jQuery(function ($) {
 					$this.trigger('check_variations');
 				});
 			}
+
+			// Let the browser paint the returned select before restoring the button text.
+			window.requestAnimationFrame(function () {
+				setButtonLoading($button, false);
+			});
 		}).fail(function () {
 			$container.html('<div class="spada-buy-now-selector-error">' + SpadaBuyNow.strings.error + '</div>');
+			setButtonLoading($button, false);
 		}).always(function () {
 			setSelectorLoading($container, false);
 		});
 	}
 
 	function checkButtonStock($button) {
+		if ($button.attr('data-stock-checking') === 'true' || $button.attr('data-stock-checked') === 'true') {
+			return;
+		}
+
 		var productId = findProductId($button);
 		if (!productId) {
 			return;
 		}
+
+		$button.attr('data-stock-checking', 'true');
 
 		$.ajax({
 			url: SpadaBuyNow.ajaxUrl,
@@ -253,9 +256,15 @@ jQuery(function ($) {
 				product_id: productId
 			}
 		}).done(function (response) {
+			$button.data('spada-product-info', response);
+			$button.attr('data-stock-checking', 'false');
 			$button.attr('data-stock-checked', 'true');
 
-			if (!response.success || !response.data.in_stock || !response.data.purchasable) {
+			if (!response.success) {
+				return;
+			}
+
+			if (!response.data.in_stock) {
 				$button.addClass('spada-buy-now-disabled').prop('disabled', true).attr('aria-disabled', 'true');
 				return;
 			}
@@ -267,24 +276,35 @@ jQuery(function ($) {
 
 			$button.removeClass('spada-buy-now-disabled').prop('disabled', false).attr('aria-disabled', 'false');
 		}).fail(function () {
-			$button
-				.attr('data-stock-checked', 'true')
-				.addClass('spada-buy-now-disabled')
-				.prop('disabled', true)
-				.attr('aria-disabled', 'true');
+			$button.attr('data-stock-checking', 'false');
 		});
 	}
 
-	$('.spada-buy-now').each(function () {
-		checkButtonStock($(this));
-	});
+	if ('IntersectionObserver' in window) {
+		var stockObserver = new IntersectionObserver(function (entries) {
+			entries.forEach(function (entry) {
+				if (entry.isIntersecting) {
+					checkButtonStock($(entry.target));
+					stockObserver.unobserve(entry.target);
+				}
+			});
+		}, { rootMargin: '300px 0px' });
+
+		$('.spada-buy-now').each(function () {
+			stockObserver.observe(this);
+		});
+	} else {
+		$('.spada-buy-now').each(function () {
+			checkButtonStock($(this));
+		});
+	}
 
 	$(document).on('click', '.spada-buy-now', function (event) {
 		event.preventDefault();
 		event.stopPropagation();
 
 		var $button = $(this);
-		if ($button.attr('data-stock-checked') !== 'true' || $button.hasClass('spada-buy-now-disabled') || $button.prop('disabled')) {
+		if ($button.hasClass('spada-buy-now-disabled') || $button.prop('disabled') || $button.attr('data-stock-checking') === 'true') {
 			return;
 		}
 
@@ -293,9 +313,12 @@ jQuery(function ($) {
 			return;
 		}
 
-		currentProductId = productId;
-		activeButton = $button;
+		if ($button.attr('data-stock-checked') !== 'true') {
+			checkButtonStock($button);
+			return;
+		}
 
+		currentProductId = productId;
 		// If this is already an opened/loaded variation selector, the button is now the Buy Now action.
 		var $container = $button.siblings('.spada-buy-now-variation');
 		if ($container.length && $container.data('loaded') === true) {
@@ -307,9 +330,8 @@ jQuery(function ($) {
 			return;
 		}
 
-		setButtonLoading($button, false);
-
-		$.ajax({
+		var productInfo = $button.data('spada-product-info');
+		var productInfoRequest = productInfo ? $.Deferred().resolve(productInfo).promise() : $.ajax({
 			url: SpadaBuyNow.ajaxUrl,
 			type: 'POST',
 			dataType: 'json',
@@ -318,18 +340,25 @@ jQuery(function ($) {
 				nonce: SpadaBuyNow.nonce,
 				product_id: productId
 			}
-		}).done(function (response) {
+		});
+
+		setButtonLoading($button, true, SpadaBuyNow.strings.loadingVariations);
+
+		productInfoRequest.done(function (response) {
 			if (!response.success) {
+				setButtonLoading($button, false);
 				alert(response.data && response.data.message ? response.data.message : SpadaBuyNow.strings.error);
 				return;
 			}
 
-			if (!response.data.in_stock || !response.data.purchasable) {
+			if (!response.data.in_stock) {
 				$button.addClass('spada-buy-now-disabled').prop('disabled', true).attr('aria-disabled', 'true');
+				setButtonLoading($button, false);
 				return;
 			}
 
 			if (response.data.type === 'simple') {
+				setButtonLoading($button, false);
 				addSimpleProduct(productId, $button);
 				return;
 			}
@@ -339,6 +368,7 @@ jQuery(function ($) {
 				loadVariationForm(productId, $button);
 			}
 		}).fail(function () {
+			setButtonLoading($button, false);
 			alert(SpadaBuyNow.strings.error);
 		});
 	});
