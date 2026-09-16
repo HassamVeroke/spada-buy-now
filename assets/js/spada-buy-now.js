@@ -14,10 +14,15 @@ jQuery(function ($) {
 			.addClass('spada-buy-now-disabled')
 			.prop('disabled', true)
 			.attr('aria-disabled', 'true')
+			.attr('data-spada-ready', 'false')
 			.attr('data-stock-checked', 'false');
 
 		setButtonLoading($button, true, SpadaBuyNow.strings.loading);
 	});
+
+	function setButtonReady($button) {
+		$button.attr('data-spada-ready', 'true');
+	}
 
 	function findProductId($button) {
 		var $product = $button.closest('.product');
@@ -253,6 +258,9 @@ jQuery(function ($) {
 
 		var productId = findProductId($button);
 		if (!productId) {
+			setButtonLoading($button, false);
+			setButtonText($button, SpadaBuyNow.strings.unavailable);
+			setButtonReady($button);
 			return;
 		}
 
@@ -275,6 +283,7 @@ jQuery(function ($) {
 			if (!response.success) {
 				setButtonLoading($button, false);
 				setButtonText($button, SpadaBuyNow.strings.unavailable);
+				setButtonReady($button);
 				return;
 			}
 
@@ -282,6 +291,7 @@ jQuery(function ($) {
 				setButtonLoading($button, false);
 				setButtonText($button, SpadaBuyNow.strings.outOfStock);
 				$button.addClass('spada-buy-now-disabled').prop('disabled', true).attr('aria-disabled', 'true');
+				setButtonReady($button);
 				return;
 			}
 
@@ -293,11 +303,13 @@ jQuery(function ($) {
 			}
 
 			$button.removeClass('spada-buy-now-disabled').prop('disabled', false).attr('aria-disabled', 'false');
+			setButtonReady($button);
 		}).fail(function () {
 			$button.attr('data-stock-checking', 'false');
 			setButtonLoading($button, false);
 			setButtonText($button, SpadaBuyNow.strings.unavailable);
 			$button.addClass('spada-buy-now-disabled').prop('disabled', true).attr('aria-disabled', 'true');
+			setButtonReady($button);
 		});
 	}
 

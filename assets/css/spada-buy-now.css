@@ -4,6 +4,9 @@
 	pointer-events: none !important;
 	cursor: wait !important;
 }
+.spada-buy-now:not([data-spada-ready="true"]) {
+	visibility: hidden !important;
+}
 .spada-buy-now-loading::after {
 	content: "";
 	display: inline-block;
