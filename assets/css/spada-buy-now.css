@@ -11,6 +11,7 @@
 	visibility: hidden !important;
 }
 .spada-buy-now-loading::after {
+	content: none !important;
 	display: none !important;
 }
 .spada-buy-now-inline-spinner {
