@@ -1,10 +1,11 @@
 <?php
 /**
- * Plugin Name: Spada Buy Now
- * Plugin URI: https://spada-wp.vproj.com/
+ * Plugin Name: Spada Core
+ * Plugin URI: https://www.veroke.com/
  * Description: Adds a Buy Now workflow to Elementor/WooCommerce product-loop buttons. Simple products go directly to checkout; variable products open a variation selector first.
  * Version: 1.6.8
- * Author: VProj
+ * Author: Veroke
+ * Author URI: https://www.veroke.com/
  * Text Domain: spada-buy-now
  * Requires Plugins: woocommerce
  */

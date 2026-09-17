@@ -1,4 +1,4 @@
-=== Spada Buy Now ===
+=== Spada Core ===
 Converts Elementor/WooCommerce product-loop Buy Now buttons into a direct checkout flow. Simple products are added directly to cart. Variable products show a compact variation selector directly above the Buy Now button instead of a popup.
 
 == Usage ==
