@@ -1,6 +1,7 @@
 .spada-buy-now {
 	display: flex !important;
 	width: 100% !important;
+	min-width: 100% !important;
 	box-sizing: border-box !important;
 	justify-content: center;
 	align-items: center;
@@ -14,14 +15,9 @@
 	opacity: .72 !important;
 	pointer-events: none !important;
 	cursor: wait !important;
-	padding-right: 42px !important;
 }
 .spada-buy-now:not([data-spada-ready="true"]) {
 	visibility: hidden !important;
-}
-.spada-buy-now-loading::after {
-	content: none !important;
-	display: none !important;
 }
 .spada-buy-now-inline-spinner {
 	display: inline-block;
