@@ -1,6 +1,15 @@
+.spada-buy-now {
+	display: flex !important;
+	width: 100% !important;
+	box-sizing: border-box !important;
+	justify-content: center;
+	align-items: center;
+}
 .spada-buy-now-loading {
 	position: relative !important;
 	box-sizing: border-box !important;
+	width: 100% !important;
+	min-width: 100% !important;
 	overflow: hidden !important;
 	opacity: .72 !important;
 	pointer-events: none !important;
@@ -28,6 +37,8 @@
 .spada-buy-now-disabled,
 .spada-buy-now:disabled,
 .spada-buy-now[aria-disabled="true"] {
+	width: 100% !important;
+	min-width: 100% !important;
 	opacity: .5 !important;
 	cursor: not-allowed !important;
 	pointer-events: none !important;
