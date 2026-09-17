@@ -37,14 +37,6 @@ class Spada_Buy_Now {
 	}
 
 	public function enqueue_assets() {
-		if ( function_exists( 'is_checkout' ) && is_checkout() && ! is_order_received_page() ) {
-			wp_enqueue_style(
-				'spada-checkout-layout',
-				SPADA_BUY_NOW_URL . 'assets/css/spada-checkout-layout.css',
-				array(),
-				SPADA_BUY_NOW_VERSION
-			);
-		}
 
 		if ( ! $this->is_archive_context() ) {
 			return;
