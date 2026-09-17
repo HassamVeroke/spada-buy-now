@@ -6,6 +6,9 @@
 	justify-content: center;
 	align-items: center;
 }
+.spada-buy-now .elementor-widget-container {
+	width: 100% !important;
+}
 .spada-buy-now-loading {
 	position: relative !important;
 	box-sizing: border-box !important;
