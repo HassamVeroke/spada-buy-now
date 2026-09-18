@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Spada Core
  * Plugin URI: https://www.veroke.com/
- * Description: Core functionality for SPADA: custom WooCommerce checkout, customer account portal with phone, WhatsApp, and email OTP authentication, and product Buy Now workflow.
+ * Description: Core functionality for SPADA: customer account portal with phone, WhatsApp, and email OTP authentication, and product Buy Now workflow.
  * Version: 1.6.9
  * Author: Veroke
  * Author URI: https://www.veroke.com/
@@ -28,10 +28,6 @@ define( 'SPADA_BUY_NOW_PATH', SPADA_CORE_PATH );
 // Load Buy Now feature
 require_once SPADA_CORE_PATH . 'includes/class-spada-buy-now.php';
 
-// Load Fluid Checkout customization modules
-require_once SPADA_CORE_PATH . 'includes/fluid-checkout/class-spada-fc-order-summary.php';
-require_once SPADA_CORE_PATH . 'includes/fluid-checkout/class-spada-fc.php';
-
 // Load Authentication & OTP modules
 require_once SPADA_CORE_PATH . 'includes/authentication/class-spada-otp-email.php';
 require_once SPADA_CORE_PATH . 'includes/authentication/class-spada-auth-ajax.php';
@@ -47,7 +43,6 @@ Spada_Buy_Now::instance();
 // Initialize Spada Core modules on plugins_loaded
 add_action( 'plugins_loaded', function() {
 	if ( class_exists( 'WooCommerce' ) ) {
-		Spada_FC::init();
 		Spada_Auth::init();
 		Spada_My_Account::init();
 	}

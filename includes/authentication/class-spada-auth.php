@@ -31,10 +31,9 @@ class Spada_Auth {
 	 * Enqueue styles and scripts conditionally.
 	 */
 	public static function enqueue_assets() {
-		$is_account  = function_exists( 'is_account_page' ) && is_account_page();
-		$is_checkout = function_exists( 'is_checkout' ) && is_checkout() && ! is_order_received_page();
+		$is_account = function_exists( 'is_account_page' ) && is_account_page();
 
-		if ( ! $is_account && ! $is_checkout ) {
+		if ( ! $is_account ) {
 			return;
 		}
 
