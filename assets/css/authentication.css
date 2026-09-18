@@ -25,9 +25,8 @@
 /* 1. Global Wrapper */
 .spada-auth-wrapper {
 	width: 100%;
-	max-width: 560px;
+	max-width: 746px;
 	margin: 0 auto;
-	padding: 10px 20px 40px 20px;
 	font-family: var(--spada-font-body);
 	box-sizing: border-box;
 }
@@ -42,7 +41,6 @@
 	background: transparent;
 	border: none;
 	border-radius: 0;
-	padding: 10px 0;
 	box-shadow: none;
 	position: relative;
 	width: 100%;
@@ -60,8 +58,15 @@
 }
 
 @keyframes spadaFadeIn {
-	from { opacity: 0; transform: translateY(6px); }
-	to { opacity: 1; transform: translateY(0); }
+	from {
+		opacity: 0;
+		transform: translateY(6px);
+	}
+
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
 }
 
 /* Top Back Button */
@@ -509,12 +514,14 @@ body.rtl .spada-back-btn:hover {
 }
 
 @keyframes spadaSpin {
-	to { transform: rotate(360deg); }
+	to {
+		transform: rotate(360deg);
+	}
 }
 
 /* Hide native unstyled WooCommerce login forms completely */
-.woocommerce-account .woocommerce > form.login,
-.woocommerce-account .woocommerce > .col2-set,
+.woocommerce-account .woocommerce>form.login,
+.woocommerce-account .woocommerce>.col2-set,
 .woocommerce-account #customer_login {
 	display: none !important;
 }
