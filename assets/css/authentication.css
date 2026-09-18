@@ -1,0 +1,520 @@
+/**
+ * SPADA Authentication UI Styles
+ *
+ * Pixel-accurate implementation of My Account.png & My Account Login-1.png to Login-7.png
+ */
+
+:root {
+	--spada-teal: #00adb5;
+	--spada-teal-hover: #00939a;
+	--spada-teal-soft: #ecfeff;
+	--spada-dark: #111827;
+	--spada-muted: #6b7280;
+	--spada-border: #e5e7eb;
+	--spada-radius-sm: 6px;
+	--spada-radius-md: 8px;
+	--spada-radius-lg: 16px;
+	--spada-radius-xl: 24px;
+	--spada-font-display: 'itf rayat', 'Barlow Condensed', 'Bebas Neue', sans-serif;
+	--spada-font-body: 'itf rayat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* 1. Global Wrapper & Header */
+.spada-auth-wrapper {
+	max-width: 680px;
+	margin: 40px auto;
+	padding: 0 16px;
+	font-family: var(--spada-font-body);
+	box-sizing: border-box;
+}
+
+.spada-auth-header {
+	text-align: center;
+	margin-bottom: 28px;
+}
+
+.spada-auth-title {
+	font-family: var(--spada-font-display) !important;
+	font-size: clamp(2.5rem, 5vw, 3.75rem) !important;
+	font-weight: 800 !important;
+	text-transform: uppercase !important;
+	letter-spacing: 1.5px !important;
+	margin: 0 0 8px 0 !important;
+	color: var(--spada-dark) !important;
+	line-height: 1.1 !important;
+}
+
+.spada-auth-subtitle {
+	font-size: 15px !important;
+	color: var(--spada-muted) !important;
+	margin: 0 !important;
+	line-height: 1.5 !important;
+}
+
+/* 2. Main Portal Card */
+.spada-auth-card {
+	background: #ffffff;
+	border: 1px solid var(--spada-border);
+	border-radius: var(--spada-radius-xl);
+	padding: 44px 36px;
+	box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.02);
+	position: relative;
+	overflow: hidden;
+}
+
+/* 3. View Management */
+.spada-auth-view {
+	display: none;
+	animation: spadaFadeIn 0.25s ease forwards;
+}
+
+.spada-auth-view.is-active {
+	display: block;
+}
+
+@keyframes spadaFadeIn {
+	from { opacity: 0; transform: translateY(6px); }
+	to { opacity: 1; transform: translateY(0); }
+}
+
+/* Back Button */
+.spada-view-nav {
+	position: absolute;
+	top: 32px;
+	left: 32px;
+}
+
+body.rtl .spada-view-nav {
+	left: auto;
+	right: 32px;
+}
+
+.spada-back-btn {
+	background: transparent;
+	border: none;
+	cursor: pointer;
+	padding: 8px;
+	color: var(--spada-dark);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: var(--spada-radius-sm);
+	transition: background-color 0.2s ease;
+}
+
+.spada-back-btn:hover {
+	background-color: #f3f4f6;
+}
+
+body.rtl .spada-back-btn svg {
+	transform: rotate(180deg);
+}
+
+/* Centered Circle Icon */
+.spada-circle-icon-wrap {
+	width: 60px;
+	height: 60px;
+	border-radius: 50%;
+	background-color: var(--spada-teal-soft);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin: 0 auto 20px auto;
+}
+
+/* 4. Choice Screen (Signup vs Login) */
+.spada-choice-grid {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 24px;
+	padding: 10px 0;
+}
+
+.spada-choice-card {
+	flex: 1;
+	max-width: 200px;
+	background: #ffffff;
+	border: 1px solid var(--spada-border);
+	border-radius: var(--spada-radius-lg);
+	padding: 32px 20px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 16px;
+	cursor: pointer;
+	transition: all 0.2s ease;
+	outline: none;
+}
+
+.spada-choice-card:hover {
+	border-color: var(--spada-teal);
+	transform: translateY(-2px);
+}
+
+.spada-choice-card.is-selected {
+	border: 1.5px solid var(--spada-teal) !important;
+	color: var(--spada-teal);
+	box-shadow: 0 4px 12px rgba(0, 173, 181, 0.12);
+}
+
+.spada-choice-icon-wrap {
+	width: 52px;
+	height: 52px;
+	border-radius: 50%;
+	background-color: #f3f4f6;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: var(--spada-dark);
+}
+
+.spada-choice-card.is-selected .spada-choice-icon-wrap {
+	background-color: var(--spada-teal-soft);
+	color: var(--spada-teal);
+}
+
+.spada-choice-label {
+	font-size: 18px;
+	font-weight: 700;
+	color: var(--spada-dark);
+}
+
+.spada-choice-card.is-selected .spada-choice-label {
+	color: var(--spada-teal);
+}
+
+.spada-choice-divider {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: #9ca3af;
+	font-size: 12px;
+	font-weight: 600;
+	position: relative;
+	margin: 20px 0;
+}
+
+.spada-choice-divider::before,
+.spada-choice-divider::after {
+	content: '';
+	flex: 1;
+	height: 1px;
+	background: var(--spada-border);
+}
+
+.spada-choice-divider span {
+	padding: 0 12px;
+}
+
+/* 5. Method Selector (My Account Login-1.png) */
+.spada-method-header {
+	text-align: center;
+	margin-bottom: 28px;
+}
+
+.spada-method-title {
+	font-size: 24px;
+	font-weight: 700;
+	color: var(--spada-dark);
+	margin: 0 0 6px 0;
+}
+
+.spada-method-subtitle {
+	font-size: 14px;
+	color: var(--spada-muted);
+	margin: 0;
+}
+
+.spada-method-list {
+	display: flex;
+	flex-direction: column;
+	gap: 14px;
+}
+
+.spada-method-btn {
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 14px;
+	padding: 16px 20px;
+	border: 1px solid var(--spada-border);
+	border-radius: var(--spada-radius-md);
+	background: #ffffff;
+	color: var(--spada-dark);
+	font-family: var(--spada-font-body);
+	font-size: 16px;
+	font-weight: 600;
+	cursor: pointer;
+	transition: all 0.2s ease;
+	min-height: 56px;
+}
+
+.spada-method-btn:hover {
+	border-color: var(--spada-teal);
+	background-color: #fafafa;
+}
+
+.spada-method-btn.is-active {
+	border: 1.5px solid var(--spada-teal);
+	color: var(--spada-teal);
+}
+
+.spada-method-btn.is-active .spada-method-icon svg {
+	stroke: var(--spada-teal);
+}
+
+/* 6. Identifier Input & OTP Headings */
+.spada-input-heading,
+.spada-verify-heading {
+	font-size: 22px;
+	font-weight: 700;
+	color: var(--spada-dark);
+	text-align: center;
+	margin: 0 0 6px 0;
+}
+
+.spada-input-subheading,
+.spada-verify-subheading {
+	font-size: 14px;
+	color: var(--spada-muted);
+	text-align: center;
+	margin: 0 0 28px 0;
+	line-height: 1.5;
+}
+
+.spada-verify-subheading strong {
+	color: var(--spada-dark);
+}
+
+/* Form Controls */
+.spada-field-group {
+	margin-bottom: 20px;
+}
+
+.spada-field-label {
+	display: block;
+	font-size: 11px;
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 0.5px;
+	color: var(--spada-muted);
+	margin-bottom: 8px;
+}
+
+.spada-input-control {
+	width: 100%;
+	border: 1px solid var(--spada-border);
+	border-radius: var(--spada-radius-md);
+	padding: 14px 18px;
+	font-size: 15px;
+	font-family: var(--spada-font-body);
+	background-color: #f9fafb;
+	color: var(--spada-dark);
+	box-sizing: border-box;
+	transition: border-color 0.2s ease, background-color 0.2s ease;
+	min-height: 50px;
+}
+
+.spada-input-control:focus {
+	border-color: var(--spada-teal);
+	background-color: #ffffff;
+	outline: none;
+}
+
+.spada-phone-input-wrap {
+	display: flex;
+	align-items: center;
+	border: 1px solid var(--spada-border);
+	border-radius: var(--spada-radius-md);
+	background-color: #f9fafb;
+	overflow: hidden;
+}
+
+.spada-phone-code {
+	padding: 14px 16px;
+	font-size: 15px;
+	font-weight: 600;
+	color: var(--spada-muted);
+	background: #f3f4f6;
+	border-inline-end: 1px solid var(--spada-border);
+}
+
+.spada-phone-input-wrap .spada-input-control {
+	border: none;
+	background: transparent;
+}
+
+/* 7. Buttons */
+.spada-btn-primary {
+	width: 100%;
+	min-height: 50px;
+	background-color: var(--spada-teal);
+	color: #ffffff;
+	border: none;
+	border-radius: var(--spada-radius-md);
+	font-family: var(--spada-font-body);
+	font-size: 16px;
+	font-weight: 700;
+	cursor: pointer;
+	transition: background-color 0.2s ease;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 8px;
+}
+
+.spada-btn-primary:hover {
+	background-color: var(--spada-teal-hover);
+}
+
+.spada-btn-outline {
+	width: 100%;
+	min-height: 50px;
+	background: transparent;
+	border: 1.5px solid var(--spada-teal);
+	border-radius: var(--spada-radius-md);
+	color: var(--spada-teal);
+	font-family: var(--spada-font-body);
+	font-size: 15px;
+	font-weight: 700;
+	cursor: pointer;
+	transition: all 0.2s ease;
+}
+
+.spada-btn-outline:hover {
+	background-color: var(--spada-teal-soft);
+}
+
+/* 8. 6-Digit OTP Matrix (My Account Login-5.png, 6.png, 7.png) */
+.spada-otp-grid {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 12px;
+	margin-bottom: 28px;
+}
+
+.spada-otp-digit {
+	width: 52px;
+	height: 58px;
+	border: 1.5px solid var(--spada-teal);
+	border-radius: var(--spada-radius-md);
+	background: #ffffff;
+	font-size: 24px;
+	font-weight: 700;
+	color: var(--spada-teal);
+	text-align: center;
+	padding: 0;
+	box-sizing: border-box;
+	transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.spada-otp-digit:focus {
+	outline: none;
+	box-shadow: 0 0 0 3px rgba(0, 173, 181, 0.25);
+	transform: scale(1.04);
+}
+
+/* Resend Section */
+.spada-resend-wrap {
+	text-align: center;
+	font-size: 13px;
+	color: var(--spada-muted);
+	margin: 20px 0 16px 0;
+}
+
+.spada-resend-link {
+	background: none;
+	border: none;
+	padding: 0;
+	font-family: inherit;
+	font-size: inherit;
+	font-weight: 700;
+	color: var(--spada-teal);
+	cursor: pointer;
+	text-decoration: underline;
+}
+
+.spada-resend-link:hover {
+	color: var(--spada-teal-hover);
+}
+
+/* Alert Notices */
+.spada-form-notice {
+	padding: 12px 16px;
+	border-radius: var(--spada-radius-md);
+	font-size: 13px;
+	margin-bottom: 18px;
+	line-height: 1.4;
+}
+
+.spada-form-notice.is-error {
+	background-color: #fee2e2;
+	border: 1px solid #fecaca;
+	color: #b91c1c;
+}
+
+.spada-form-notice.is-success {
+	background-color: #ecfdf5;
+	border: 1px solid #d1fae5;
+	color: #059669;
+}
+
+/* Utility */
+.is-hidden {
+	display: none !important;
+}
+
+/* Spinner */
+.spada-btn-spinner {
+	width: 18px;
+	height: 18px;
+	border: 2px solid rgba(255, 255, 255, 0.3);
+	border-top-color: #ffffff;
+	border-radius: 50%;
+	animation: spadaSpin 0.6s linear infinite;
+}
+
+@keyframes spadaSpin {
+	to { transform: rotate(360deg); }
+}
+
+/* 9. Responsive */
+@media (max-width: 640px) {
+	.spada-auth-card {
+		padding: 32px 20px;
+		border-radius: var(--spada-radius-lg);
+	}
+
+	.spada-view-nav {
+		top: 20px;
+		left: 16px;
+	}
+
+	body.rtl .spada-view-nav {
+		right: 16px;
+	}
+
+	.spada-otp-grid {
+		gap: 6px;
+	}
+
+	.spada-otp-digit {
+		width: 44px;
+		height: 50px;
+		font-size: 20px;
+	}
+
+	.spada-choice-grid {
+		flex-direction: column;
+		gap: 16px;
+	}
+
+	.spada-choice-card {
+		max-width: 100%;
+		width: 100%;
+		padding: 24px;
+	}
+}

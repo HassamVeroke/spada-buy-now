@@ -1,0 +1,126 @@
+<?php
+/**
+ * SPADA Authentication AJAX Handlers
+ *
+ * Secure AJAX endpoints for Email OTP dispatch, verification, and session creation.
+ *
+ * @package Spada
+ */
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
+class Spada_Auth_Ajax {
+
+	/**
+	 * Init hooks.
+	 */
+	public static function init() {
+		add_action( 'wp_ajax_nopriv_spada_request_email_otp', array( __CLASS__, 'ajax_request_email_otp' ) );
+		add_action( 'wp_ajax_spada_request_email_otp', array( __CLASS__, 'ajax_request_email_otp' ) );
+
+		add_action( 'wp_ajax_nopriv_spada_verify_email_otp', array( __CLASS__, 'ajax_verify_email_otp' ) );
+		add_action( 'wp_ajax_spada_verify_email_otp', array( __CLASS__, 'ajax_verify_email_otp' ) );
+
+		add_action( 'wp_ajax_nopriv_spada_resend_email_otp', array( __CLASS__, 'ajax_resend_email_otp' ) );
+		add_action( 'wp_ajax_spada_resend_email_otp', array( __CLASS__, 'ajax_resend_email_otp' ) );
+	}
+
+	/**
+	 * Request Email OTP handler.
+	 */
+	public static function ajax_request_email_otp() {
+		check_ajax_referer( 'spada_auth_nonce', 'nonce' );
+
+		$email = isset( $_POST['email'] ) ? sanitize_email( wp_unslash( $_POST['email'] ) ) : '';
+
+		if ( empty( $email ) || ! is_email( $email ) ) {
+			wp_send_json_error(
+				array( 'message' => __( 'Please provide a valid email address.', 'spada-core' ) ),
+				400
+			);
+		}
+
+		$result = Spada_OTP_Email::send_otp( $email );
+
+		if ( ! $result['success'] ) {
+			wp_send_json_error( array( 'message' => $result['message'] ), 400 );
+		}
+
+		wp_send_json_success(
+			array(
+				'message' => $result['message'],
+				'email'   => $email,
+			)
+		);
+	}
+
+	/**
+	 * Verify Email OTP handler.
+	 */
+	public static function ajax_verify_email_otp() {
+		check_ajax_referer( 'spada_auth_nonce', 'nonce' );
+
+		$email    = isset( $_POST['email'] ) ? sanitize_email( wp_unslash( $_POST['email'] ) ) : '';
+		$otp_code = isset( $_POST['otp_code'] ) ? sanitize_text_field( wp_unslash( $_POST['otp_code'] ) ) : '';
+
+		if ( empty( $email ) || empty( $otp_code ) ) {
+			wp_send_json_error(
+				array( 'message' => __( 'Email and 6-digit verification code are required.', 'spada-core' ) ),
+				400
+			);
+		}
+
+		$result = Spada_OTP_Email::verify_otp( $email, $otp_code );
+
+		if ( ! $result['success'] ) {
+			wp_send_json_error(
+				array(
+					'message'   => $result['message'],
+					'remaining' => isset( $result['remaining'] ) ? $result['remaining'] : 0,
+				),
+				400
+			);
+		}
+
+		// Optional redirect override (e.g. from checkout or redirect_to parameter)
+		$redirect = wc_get_account_endpoint_url( 'dashboard' );
+		if ( ! empty( $_POST['redirect_to'] ) ) {
+			$redirect = esc_url_raw( wp_unslash( $_POST['redirect_to'] ) );
+		} elseif ( function_exists( 'is_checkout' ) && isset( $_POST['is_checkout'] ) && 'yes' === $_POST['is_checkout'] ) {
+			$redirect = wc_get_checkout_url();
+		}
+
+		wp_send_json_success(
+			array(
+				'message'  => $result['message'],
+				'redirect' => $redirect,
+			)
+		);
+	}
+
+	/**
+	 * Resend Email OTP handler.
+	 */
+	public static function ajax_resend_email_otp() {
+		check_ajax_referer( 'spada_auth_nonce', 'nonce' );
+
+		$email = isset( $_POST['email'] ) ? sanitize_email( wp_unslash( $_POST['email'] ) ) : '';
+
+		if ( empty( $email ) || ! is_email( $email ) ) {
+			wp_send_json_error(
+				array( 'message' => __( 'Please provide a valid email address.', 'spada-core' ) ),
+				400
+			);
+		}
+
+		$result = Spada_OTP_Email::send_otp( $email );
+
+		if ( ! $result['success'] ) {
+			wp_send_json_error( array( 'message' => $result['message'] ), 400 );
+		}
+
+		wp_send_json_success( array( 'message' => __( 'New verification code has been sent.', 'spada-core' ) ) );
+	}
+}

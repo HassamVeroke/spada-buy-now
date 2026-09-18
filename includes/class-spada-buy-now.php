@@ -93,16 +93,16 @@ class Spada_Buy_Now {
 				),
 				'buttonClass'=> 'spada-buy-now',
 				'strings'    => array(
-					'loading'          => __( 'Loading...', 'spada-buy-now' ),
-					'loadingVariations' => __( 'Loading options...', 'spada-buy-now' ),
-					'buyNow'           => __( 'Buy Now', 'spada-buy-now' ),
-					'selectOptions'    => __( 'Select Options', 'spada-buy-now' ),
-					'buyNowFor'        => __( 'Buy Now for %s', 'spada-buy-now' ),
-					'outOfStock'       => __( 'Out of Stock', 'spada-buy-now' ),
-					'unavailable'      => __( 'Unavailable', 'spada-buy-now' ),
-					'selectVariation'  => __( 'Please select all available options.', 'spada-buy-now' ),
-					'notAvailable'     => __( 'This variation is not available.', 'spada-buy-now' ),
-					'error'            => __( 'Something went wrong. Please try again.', 'spada-buy-now' ),
+					'loading'          => __( 'Loading...', 'spada-core' ),
+					'loadingVariations' => __( 'Loading options...', 'spada-core' ),
+					'buyNow'           => __( 'Buy Now', 'spada-core' ),
+					'selectOptions'    => __( 'Select Options', 'spada-core' ),
+					'buyNowFor'        => __( 'Buy Now for %s', 'spada-core' ),
+					'outOfStock'       => __( 'Out of Stock', 'spada-core' ),
+					'unavailable'      => __( 'Unavailable', 'spada-core' ),
+					'selectVariation'  => __( 'Please select all available options.', 'spada-core' ),
+					'notAvailable'     => __( 'This variation is not available.', 'spada-core' ),
+					'error'            => __( 'Something went wrong. Please try again.', 'spada-core' ),
 				),
 			)
 		);
@@ -120,7 +120,7 @@ class Spada_Buy_Now {
 
 		if ( ! $product ) {
 			wp_send_json_error(
-				array( 'message' => __( 'Product could not be found.', 'spada-buy-now' ) ),
+				array( 'message' => __( 'Product could not be found.', 'spada-core' ) ),
 				404
 			);
 		}
@@ -146,7 +146,7 @@ class Spada_Buy_Now {
 
 		if ( ! $wc_product || ! $wc_product->is_type( 'variable' ) ) {
 			wp_send_json_error(
-				array( 'message' => __( 'Variable product could not be found.', 'spada-buy-now' ) ),
+				array( 'message' => __( 'Variable product could not be found.', 'spada-core' ) ),
 				404
 			);
 		}
@@ -192,7 +192,7 @@ class Spada_Buy_Now {
 
 		if ( ! function_exists( 'WC' ) || ! WC()->cart ) {
 			wp_send_json_error(
-				array( 'message' => __( 'Cart is unavailable.', 'spada-buy-now' ) ),
+				array( 'message' => __( 'Cart is unavailable.', 'spada-core' ) ),
 				400
 			);
 		}
@@ -206,7 +206,7 @@ class Spada_Buy_Now {
 
 		if ( ! $product ) {
 			wp_send_json_error(
-				array( 'message' => __( 'Product could not be found.', 'spada-buy-now' ) ),
+				array( 'message' => __( 'Product could not be found.', 'spada-core' ) ),
 				404
 			);
 		}
@@ -216,7 +216,7 @@ class Spada_Buy_Now {
 		if ( $product->is_type( 'variable' ) ) {
 			if ( ! $variation_id ) {
 				wp_send_json_error(
-					array( 'message' => __( 'Please select a variation.', 'spada-buy-now' ) ),
+					array( 'message' => __( 'Please select a variation.', 'spada-core' ) ),
 					400
 				);
 			}
@@ -225,7 +225,7 @@ class Spada_Buy_Now {
 
 			if ( ! $variation_product || ! $variation_product->is_type( 'variation' ) || (int) $variation_product->get_parent_id() !== (int) $product_id ) {
 				wp_send_json_error(
-					array( 'message' => __( 'Invalid variation selected.', 'spada-buy-now' ) ),
+					array( 'message' => __( 'Invalid variation selected.', 'spada-core' ) ),
 					400
 				);
 			}
@@ -235,7 +235,7 @@ class Spada_Buy_Now {
 			$variation_check = $product->get_available_variation( $variation_id );
 			if ( ! $variation_check ) {
 				wp_send_json_error(
-					array( 'message' => __( 'This variation is not available.', 'spada-buy-now' ) ),
+					array( 'message' => __( 'This variation is not available.', 'spada-core' ) ),
 					400
 				);
 			}
@@ -256,7 +256,7 @@ class Spada_Buy_Now {
 				array(
 					'message' => ! empty( $message[0]['notice'] )
 						? wp_strip_all_tags( $message[0]['notice'] )
-						: __( 'The product could not be added to the cart.', 'spada-buy-now' ),
+						: __( 'The product could not be added to the cart.', 'spada-core' ),
 				),
 				400
 			);
