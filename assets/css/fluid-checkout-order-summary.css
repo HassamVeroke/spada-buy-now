@@ -106,7 +106,7 @@ table.spada-order-summary-table tbody tr.spada-cart-item {
 /* Product Content Details */
 .spada-item-details {
 	flex: 1 1 auto !important;
-	min-width: 0 !important;
+	min-width: calc(100% - 20px) !important;
 	display: flex !important;
 	flex-direction: column !important;
 	justify-content: space-between !important;
@@ -374,6 +374,7 @@ table.spada-order-summary-table tfoot {
 	padding: 10px 0 6px 0 !important;
 	border: none !important;
 	background: transparent !important;
+	text-align: start !important;
 }
 
 .spada-coupon-toggle-btn {
@@ -382,7 +383,7 @@ table.spada-order-summary-table tfoot {
 	padding: 0 !important;
 	color: var(--spada-teal) !important;
 	font-family: var(--spada-font-body) !important;
-	font-size: 13.5px !important;
+	font-size: 15px !important;
 	font-weight: 500 !important;
 	cursor: pointer !important;
 	display: inline-flex !important;
@@ -484,6 +485,7 @@ table.spada-order-summary-table tfoot {
 	justify-content: space-between !important;
 	width: 100% !important;
 	box-sizing: border-box !important;
+	border: 1px solid #d1d5db;
 }
 
 .spada-total-card-label {

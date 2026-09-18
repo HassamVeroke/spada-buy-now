@@ -37,8 +37,8 @@
 }
 
 .spada-auth-wrapper button {
-	background-color: transparent;
-	font-family: 'Inter', sans-serif;
+	background-color: transparent !important;
+	font-family: var(--spada-font-button);
 	font-weight: 600;
 	font-size: 28px;
 	line-height: 26px;
@@ -118,9 +118,9 @@ body.rtl .spada-back-btn:hover {
 }
 
 .spada-choice-card {
-	flex: 0 0 160px;
-	width: 160px;
-	height: 160px;
+	flex: 0 0 200px;
+	width: 200px;
+	height: 200px;
 	background: #ffffff;
 	border: 1px solid #e2e8f0;
 	border-radius: 12px;
@@ -137,7 +137,7 @@ body.rtl .spada-back-btn:hover {
 }
 
 .spada-choice-card:hover {
-	border-color: var(--spada-teal);
+	border-color: var(--spada-teal) !important;
 	transform: translateY(-2px);
 	box-shadow: 0 4px 14px rgba(0, 173, 181, 0.12);
 }
@@ -151,6 +151,7 @@ body.rtl .spada-back-btn:hover {
 	width: 54px;
 	height: 54px;
 	border-radius: 50%;
+	margin: 0 auto 15px;
 	background-color: #f3f4f6;
 	display: flex;
 	align-items: center;
@@ -166,9 +167,7 @@ body.rtl .spada-back-btn:hover {
 }
 
 .spada-choice-label {
-	font-family: var(--spada-font-display);
-	font-size: 19px;
-	font-weight: 600;
+	font-family: 'Inter', sans-serif;
 	letter-spacing: 0.5px;
 	color: var(--spada-dark);
 	text-transform: capitalize;
