@@ -38,9 +38,16 @@ class Spada_Auth {
 		}
 
 		wp_enqueue_style(
+			'spada-google-font-oswald',
+			'https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&display=swap',
+			array(),
+			null
+		);
+
+		wp_enqueue_style(
 			'spada-authentication',
 			SPADA_CORE_URL . 'assets/css/authentication.css',
-			array(),
+			array( 'spada-google-font-oswald' ),
 			SPADA_CORE_VERSION
 		);
 
@@ -58,7 +65,7 @@ class Spada_Auth {
 			array(
 				'ajaxUrl'      => admin_url( 'admin-ajax.php' ),
 				'nonce'        => wp_create_nonce( 'spada_auth_nonce' ),
-				'isCheckout'   => $is_checkout ? 'yes' : 'no',
+				'isCheckout'   => 'no',
 				'checkoutUrl'  => function_exists( 'wc_get_checkout_url' ) ? wc_get_checkout_url() : '',
 				'accountUrl'   => function_exists( 'wc_get_page_permalink' ) ? wc_get_page_permalink( 'myaccount' ) : '',
 				'isRtl'        => is_rtl(),
@@ -101,8 +108,16 @@ class Spada_Auth {
 			return;
 		}
 
+		static $rendered = false;
+		if ( $rendered ) {
+			return;
+		}
+		$rendered = true;
+
+		include SPADA_CORE_PATH . 'templates/authentication/account-portal.php';
+
 		// Prevent default unstyled WooCommerce forms from appearing below
-		echo '<div class="spada-native-login-hidden" style="display:none;">';
+		echo '<div class="spada-native-login-hidden" style="display:none !important;">';
 		add_action(
 			'woocommerce_after_customer_login_form',
 			function() {
@@ -110,8 +125,6 @@ class Spada_Auth {
 			},
 			99
 		);
-
-		include SPADA_CORE_PATH . 'templates/authentication/account-portal.php';
 	}
 
 	/**

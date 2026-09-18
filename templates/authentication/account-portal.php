@@ -12,7 +12,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 ?>
 <div class="spada-auth-wrapper" id="spada-auth-portal">
-	<div class="spada-auth-header">
+	<!-- Hidden header: Elementor hero section already provides the page title and subtitle -->
+	<div class="spada-auth-header" style="display: none !important;">
 		<h1 class="spada-auth-title" id="spada-auth-main-title"><?php esc_html_e( 'ACCOUNT', 'spada-core' ); ?></h1>
 		<p class="spada-auth-subtitle" id="spada-auth-main-subtitle"><?php esc_html_e( 'Please provide necessary details to access to your account.', 'spada-core' ); ?></p>
 	</div>

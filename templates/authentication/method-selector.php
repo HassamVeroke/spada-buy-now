@@ -12,6 +12,16 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 ?>
 <div class="spada-auth-view" id="spada-view-methods" data-view="methods">
+	<!-- Top Navigation -->
+	<div class="spada-view-nav">
+		<button type="button" class="spada-back-btn" id="spada-methods-back-btn" aria-label="<?php esc_attr_e( 'Back to choice', 'spada-core' ); ?>">
+			<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+				<line x1="19" y1="12" x2="5" y2="12"></line>
+				<polyline points="12 19 5 12 12 5"></polyline>
+			</svg>
+		</button>
+	</div>
+
 	<div class="spada-method-header">
 		<h2 class="spada-method-title"><?php esc_html_e( 'Choose account', 'spada-core' ); ?></h2>
 		<p class="spada-method-subtitle"><?php esc_html_e( 'Please select any of the below to continue.', 'spada-core' ); ?></p>

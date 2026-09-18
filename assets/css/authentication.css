@@ -2,70 +2,57 @@
  * SPADA Authentication UI Styles
  *
  * Pixel-accurate implementation of My Account.png & My Account Login-1.png to Login-7.png
+ * Styled to blend seamlessly with Elementor Hero Section.
  */
 
 :root {
 	--spada-teal: #00adb5;
 	--spada-teal-hover: #00939a;
-	--spada-teal-soft: #ecfeff;
+	--spada-teal-soft: #e0f7fa;
 	--spada-dark: #111827;
 	--spada-muted: #6b7280;
 	--spada-border: #e5e7eb;
+	--spada-border-light: #f3f4f6;
 	--spada-radius-sm: 6px;
 	--spada-radius-md: 8px;
-	--spada-radius-lg: 16px;
-	--spada-radius-xl: 24px;
-	--spada-font-display: 'itf rayat', 'Barlow Condensed', 'Bebas Neue', sans-serif;
-	--spada-font-body: 'itf rayat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+	--spada-radius-lg: 12px;
+	--spada-radius-xl: 16px;
+	--spada-font-display: 'Oswald', sans-serif;
+	--spada-font-body: 'Helvetica', Arial, sans-serif;
+	--spada-font-button: 'GW Flatgrip Regular', 'GW Flatgrip', sans-serif;
 }
 
-/* 1. Global Wrapper & Header */
+/* 1. Global Wrapper */
 .spada-auth-wrapper {
-	max-width: 680px;
-	margin: 40px auto;
-	padding: 0 16px;
+	width: 100%;
+	max-width: 560px;
+	margin: 0 auto;
+	padding: 10px 20px 40px 20px;
 	font-family: var(--spada-font-body);
 	box-sizing: border-box;
 }
 
+/* Hide duplicate header: Elementor hero section already provides the page title and subtitle */
 .spada-auth-header {
-	text-align: center;
-	margin-bottom: 28px;
+	display: none !important;
 }
 
-.spada-auth-title {
-	font-family: var(--spada-font-display) !important;
-	font-size: clamp(2.5rem, 5vw, 3.75rem) !important;
-	font-weight: 800 !important;
-	text-transform: uppercase !important;
-	letter-spacing: 1.5px !important;
-	margin: 0 0 8px 0 !important;
-	color: var(--spada-dark) !important;
-	line-height: 1.1 !important;
-}
-
-.spada-auth-subtitle {
-	font-size: 15px !important;
-	color: var(--spada-muted) !important;
-	margin: 0 !important;
-	line-height: 1.5 !important;
-}
-
-/* 2. Main Portal Card */
+/* 2. Main Portal Card (Blends directly into Elementor's white curved sheet) */
 .spada-auth-card {
-	background: #ffffff;
-	border: 1px solid var(--spada-border);
-	border-radius: var(--spada-radius-xl);
-	padding: 44px 36px;
-	box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.02);
+	background: transparent;
+	border: none;
+	border-radius: 0;
+	padding: 10px 0;
+	box-shadow: none;
 	position: relative;
-	overflow: hidden;
+	width: 100%;
 }
 
 /* 3. View Management */
 .spada-auth-view {
 	display: none;
-	animation: spadaFadeIn 0.25s ease forwards;
+	animation: spadaFadeIn 0.22s ease forwards;
+	width: 100%;
 }
 
 .spada-auth-view.is-active {
@@ -77,109 +64,105 @@
 	to { opacity: 1; transform: translateY(0); }
 }
 
-/* Back Button */
+/* Top Back Button */
 .spada-view-nav {
-	position: absolute;
-	top: 32px;
-	left: 32px;
-}
-
-body.rtl .spada-view-nav {
-	left: auto;
-	right: 32px;
+	margin-bottom: 8px;
 }
 
 .spada-back-btn {
 	background: transparent;
 	border: none;
 	cursor: pointer;
-	padding: 8px;
+	padding: 6px 8px;
 	color: var(--spada-dark);
-	display: flex;
+	display: inline-flex;
 	align-items: center;
 	justify-content: center;
-	border-radius: var(--spada-radius-sm);
-	transition: background-color 0.2s ease;
+	border-radius: 50%;
+	transition: background-color 0.2s ease, transform 0.15s ease;
 }
 
 .spada-back-btn:hover {
 	background-color: #f3f4f6;
+	transform: translateX(-2px);
 }
 
-body.rtl .spada-back-btn svg {
-	transform: rotate(180deg);
+body.rtl .spada-back-btn {
+	transform: scaleX(-1);
 }
 
-/* Centered Circle Icon */
-.spada-circle-icon-wrap {
-	width: 60px;
-	height: 60px;
-	border-radius: 50%;
-	background-color: var(--spada-teal-soft);
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	margin: 0 auto 20px auto;
+body.rtl .spada-back-btn:hover {
+	transform: scaleX(-1) translateX(-2px);
 }
 
-/* 4. Choice Screen (Signup vs Login) */
+/* 4. Choice Screen: Signup vs Login (Matches My Account.png) */
 .spada-choice-grid {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	gap: 24px;
-	padding: 10px 0;
+	gap: 20px;
+	padding: 24px 0 16px 0;
+	width: 100%;
 }
 
 .spada-choice-card {
-	flex: 1;
-	max-width: 200px;
+	flex: 0 0 160px;
+	width: 160px;
+	height: 160px;
 	background: #ffffff;
-	border: 1px solid var(--spada-border);
-	border-radius: var(--spada-radius-lg);
-	padding: 32px 20px;
+	border: 1px solid #e2e8f0;
+	border-radius: 12px;
+	padding: 24px 16px;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	gap: 16px;
+	justify-content: center;
+	gap: 14px;
 	cursor: pointer;
 	transition: all 0.2s ease;
 	outline: none;
+	box-sizing: border-box;
 }
 
 .spada-choice-card:hover {
 	border-color: var(--spada-teal);
 	transform: translateY(-2px);
+	box-shadow: 0 4px 14px rgba(0, 173, 181, 0.12);
 }
 
 .spada-choice-card.is-selected {
 	border: 1.5px solid var(--spada-teal) !important;
-	color: var(--spada-teal);
-	box-shadow: 0 4px 12px rgba(0, 173, 181, 0.12);
+	box-shadow: 0 4px 16px rgba(0, 173, 181, 0.14);
 }
 
 .spada-choice-icon-wrap {
-	width: 52px;
-	height: 52px;
+	width: 54px;
+	height: 54px;
 	border-radius: 50%;
 	background-color: #f3f4f6;
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	color: var(--spada-dark);
+	color: #374151;
+	transition: background-color 0.2s ease, color 0.2s ease;
 }
 
+.spada-choice-card:hover .spada-choice-icon-wrap,
 .spada-choice-card.is-selected .spada-choice-icon-wrap {
 	background-color: var(--spada-teal-soft);
 	color: var(--spada-teal);
 }
 
 .spada-choice-label {
-	font-size: 18px;
-	font-weight: 700;
+	font-family: var(--spada-font-display);
+	font-size: 19px;
+	font-weight: 600;
+	letter-spacing: 0.5px;
 	color: var(--spada-dark);
+	text-transform: capitalize;
 }
 
+.spada-choice-card:hover .spada-choice-label,
 .spada-choice-card.is-selected .spada-choice-label {
 	color: var(--spada-teal);
 }
@@ -189,10 +172,11 @@ body.rtl .spada-back-btn svg {
 	align-items: center;
 	justify-content: center;
 	color: #9ca3af;
-	font-size: 12px;
+	font-family: var(--spada-font-body);
+	font-size: 13px;
 	font-weight: 600;
-	position: relative;
-	margin: 20px 0;
+	flex: 0 0 70px;
+	width: 70px;
 }
 
 .spada-choice-divider::before,
@@ -200,36 +184,43 @@ body.rtl .spada-back-btn svg {
 	content: '';
 	flex: 1;
 	height: 1px;
-	background: var(--spada-border);
+	background: #e2e8f0;
 }
 
 .spada-choice-divider span {
-	padding: 0 12px;
+	padding: 0 10px;
 }
 
-/* 5. Method Selector (My Account Login-1.png) */
+/* 5. Method Selector Screen (Matches My Account Login-1.png) */
 .spada-method-header {
 	text-align: center;
-	margin-bottom: 28px;
+	margin-bottom: 26px;
 }
 
 .spada-method-title {
-	font-size: 24px;
+	font-family: var(--spada-font-display);
+	font-size: 28px;
 	font-weight: 700;
+	letter-spacing: 0.5px;
 	color: var(--spada-dark);
 	margin: 0 0 6px 0;
+	line-height: 1.2;
 }
 
 .spada-method-subtitle {
+	font-family: var(--spada-font-body);
 	font-size: 14px;
 	color: var(--spada-muted);
 	margin: 0;
+	line-height: 1.5;
 }
 
 .spada-method-list {
 	display: flex;
 	flex-direction: column;
 	gap: 14px;
+	max-width: 440px;
+	margin: 0 auto;
 }
 
 .spada-method-btn {
@@ -237,23 +228,24 @@ body.rtl .spada-back-btn svg {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	gap: 14px;
-	padding: 16px 20px;
+	gap: 12px;
+	padding: 14px 20px;
 	border: 1px solid var(--spada-border);
 	border-radius: var(--spada-radius-md);
 	background: #ffffff;
 	color: var(--spada-dark);
-	font-family: var(--spada-font-body);
+	font-family: var(--spada-font-button);
 	font-size: 16px;
-	font-weight: 600;
+	font-weight: 400;
 	cursor: pointer;
 	transition: all 0.2s ease;
-	min-height: 56px;
+	min-height: 52px;
+	box-sizing: border-box;
 }
 
 .spada-method-btn:hover {
 	border-color: var(--spada-teal);
-	background-color: #fafafa;
+	background-color: #f9fafb;
 }
 
 .spada-method-btn.is-active {
@@ -265,40 +257,67 @@ body.rtl .spada-back-btn svg {
 	stroke: var(--spada-teal);
 }
 
-/* 6. Identifier Input & OTP Headings */
+/* 6. Identifier Input & OTP Headings (Matches Login-2.png & Login-5.png) */
+.spada-circle-icon-wrap {
+	width: 58px;
+	height: 58px;
+	border-radius: 50%;
+	background-color: var(--spada-teal-soft);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin: 0 auto 18px auto;
+}
+
+.spada-circle-icon-wrap svg {
+	stroke: var(--spada-teal);
+}
+
 .spada-input-heading,
 .spada-verify-heading {
-	font-size: 22px;
+	font-family: var(--spada-font-display);
+	font-size: 26px;
 	font-weight: 700;
+	letter-spacing: 0.5px;
 	color: var(--spada-dark);
 	text-align: center;
 	margin: 0 0 6px 0;
+	line-height: 1.2;
 }
 
 .spada-input-subheading,
 .spada-verify-subheading {
+	font-family: var(--spada-font-body);
 	font-size: 14px;
 	color: var(--spada-muted);
 	text-align: center;
-	margin: 0 0 28px 0;
+	margin: 0 0 24px 0;
 	line-height: 1.5;
 }
 
 .spada-verify-subheading strong {
 	color: var(--spada-dark);
+	display: inline-block;
+	margin-top: 4px;
 }
 
-/* Form Controls */
+.spada-input-form,
+.spada-verify-form {
+	max-width: 440px;
+	margin: 0 auto;
+}
+
 .spada-field-group {
-	margin-bottom: 20px;
+	margin-bottom: 18px;
 }
 
 .spada-field-label {
 	display: block;
+	font-family: var(--spada-font-body);
 	font-size: 11px;
 	font-weight: 700;
 	text-transform: uppercase;
-	letter-spacing: 0.5px;
+	letter-spacing: 0.8px;
 	color: var(--spada-muted);
 	margin-bottom: 8px;
 }
@@ -307,14 +326,14 @@ body.rtl .spada-back-btn svg {
 	width: 100%;
 	border: 1px solid var(--spada-border);
 	border-radius: var(--spada-radius-md);
-	padding: 14px 18px;
+	padding: 13px 16px;
 	font-size: 15px;
 	font-family: var(--spada-font-body);
 	background-color: #f9fafb;
 	color: var(--spada-dark);
 	box-sizing: border-box;
 	transition: border-color 0.2s ease, background-color 0.2s ease;
-	min-height: 50px;
+	min-height: 48px;
 }
 
 .spada-input-control:focus {
@@ -333,8 +352,9 @@ body.rtl .spada-back-btn svg {
 }
 
 .spada-phone-code {
-	padding: 14px 16px;
-	font-size: 15px;
+	padding: 13px 14px;
+	font-size: 14px;
+	font-family: var(--spada-font-body);
 	font-weight: 600;
 	color: var(--spada-muted);
 	background: #f3f4f6;
@@ -346,23 +366,25 @@ body.rtl .spada-back-btn svg {
 	background: transparent;
 }
 
-/* 7. Buttons */
+/* 7. Buttons with GW Flatgrip font */
 .spada-btn-primary {
 	width: 100%;
-	min-height: 50px;
+	min-height: 48px;
 	background-color: var(--spada-teal);
 	color: #ffffff;
 	border: none;
 	border-radius: var(--spada-radius-md);
-	font-family: var(--spada-font-body);
+	font-family: var(--spada-font-button);
 	font-size: 16px;
-	font-weight: 700;
+	font-weight: 400;
 	cursor: pointer;
 	transition: background-color 0.2s ease;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	gap: 8px;
+	text-decoration: none;
+	box-sizing: border-box;
 }
 
 .spada-btn-primary:hover {
@@ -371,38 +393,44 @@ body.rtl .spada-back-btn svg {
 
 .spada-btn-outline {
 	width: 100%;
-	min-height: 50px;
+	min-height: 48px;
 	background: transparent;
 	border: 1.5px solid var(--spada-teal);
 	border-radius: var(--spada-radius-md);
 	color: var(--spada-teal);
-	font-family: var(--spada-font-body);
+	font-family: var(--spada-font-button);
 	font-size: 15px;
-	font-weight: 700;
+	font-weight: 400;
 	cursor: pointer;
 	transition: all 0.2s ease;
+	text-decoration: none;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	box-sizing: border-box;
 }
 
 .spada-btn-outline:hover {
 	background-color: var(--spada-teal-soft);
 }
 
-/* 8. 6-Digit OTP Matrix (My Account Login-5.png, 6.png, 7.png) */
+/* 8. 6-Digit OTP Matrix (Matches Login-5.png, 6.png, 7.png) */
 .spada-otp-grid {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	gap: 12px;
-	margin-bottom: 28px;
+	gap: 10px;
+	margin-bottom: 24px;
 }
 
 .spada-otp-digit {
-	width: 52px;
-	height: 58px;
+	width: 48px;
+	height: 52px;
 	border: 1.5px solid var(--spada-teal);
 	border-radius: var(--spada-radius-md);
 	background: #ffffff;
-	font-size: 24px;
+	font-family: var(--spada-font-body);
+	font-size: 22px;
 	font-weight: 700;
 	color: var(--spada-teal);
 	text-align: center;
@@ -420,9 +448,10 @@ body.rtl .spada-back-btn svg {
 /* Resend Section */
 .spada-resend-wrap {
 	text-align: center;
+	font-family: var(--spada-font-body);
 	font-size: 13px;
 	color: var(--spada-muted);
-	margin: 20px 0 16px 0;
+	margin: 18px 0 14px 0;
 }
 
 .spada-resend-link {
@@ -443,11 +472,13 @@ body.rtl .spada-back-btn svg {
 
 /* Alert Notices */
 .spada-form-notice {
-	padding: 12px 16px;
+	padding: 10px 14px;
 	border-radius: var(--spada-radius-md);
+	font-family: var(--spada-font-body);
 	font-size: 13px;
-	margin-bottom: 18px;
+	margin-bottom: 16px;
 	line-height: 1.4;
+	text-align: center;
 }
 
 .spada-form-notice.is-error {
@@ -481,20 +512,38 @@ body.rtl .spada-back-btn svg {
 	to { transform: rotate(360deg); }
 }
 
-/* 9. Responsive */
+/* Hide native unstyled WooCommerce login forms completely */
+.woocommerce-account .woocommerce > form.login,
+.woocommerce-account .woocommerce > .col2-set,
+.woocommerce-account #customer_login {
+	display: none !important;
+}
+
+/* 9. Responsive adjustments */
 @media (max-width: 640px) {
-	.spada-auth-card {
-		padding: 32px 20px;
-		border-radius: var(--spada-radius-lg);
+	.spada-auth-wrapper {
+		padding: 10px 16px 30px 16px;
 	}
 
-	.spada-view-nav {
-		top: 20px;
-		left: 16px;
+	.spada-choice-grid {
+		flex-direction: row;
+		gap: 12px;
 	}
 
-	body.rtl .spada-view-nav {
-		right: 16px;
+	.spada-choice-card {
+		flex: 1;
+		max-width: 145px;
+		height: 145px;
+		padding: 18px 12px;
+	}
+
+	.spada-choice-divider {
+		flex: 0 0 40px;
+		width: 40px;
+	}
+
+	.spada-choice-divider span {
+		padding: 0 4px;
 	}
 
 	.spada-otp-grid {
@@ -502,19 +551,8 @@ body.rtl .spada-back-btn svg {
 	}
 
 	.spada-otp-digit {
-		width: 44px;
-		height: 50px;
+		width: 42px;
+		height: 48px;
 		font-size: 20px;
-	}
-
-	.spada-choice-grid {
-		flex-direction: column;
-		gap: 16px;
-	}
-
-	.spada-choice-card {
-		max-width: 100%;
-		width: 100%;
-		padding: 24px;
 	}
 }

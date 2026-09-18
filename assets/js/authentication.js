@@ -91,6 +91,10 @@
 			});
 
 			// 3. Navigation buttons
+			$('#spada-methods-back-btn').on('click', function() {
+				self.showView('choice');
+			});
+
 			this.$inputBackBtn.on('click', function() {
 				self.showView('methods');
 			});
