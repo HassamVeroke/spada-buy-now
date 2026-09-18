@@ -1,0 +1,542 @@
+/**
+ * SPADA Fluid Checkout Order Summary Styles
+ *
+ * Pixel-perfect implementation matching the Figma Order Summary screenshot.
+ * Fonts: Helvetica (body/labels), Oswald (headings & TOTAL), GW Flatgrip (buttons).
+ */
+
+:root {
+	--spada-teal: #00adb5;
+	--spada-teal-hover: #00939a;
+	--spada-teal-soft: #e0f7fa;
+	--spada-dark: #111827;
+	--spada-muted: #6b7280;
+	--spada-border: #e5e7eb;
+	--spada-border-light: #f3f4f6;
+	--spada-bg-card: #f4f5f7;
+	--spada-font-display: 'Oswald', sans-serif;
+	--spada-font-body: 'Helvetica', Arial, sans-serif;
+	--spada-font-button: 'GW Flatgrip Regular', 'GW Flatgrip', sans-serif;
+}
+
+/* ==========================================================================
+   1. Order Summary Section Header
+   ========================================================================== */
+
+.fc-checkout-order-review__head {
+	display: flex !important;
+	align-items: center !important;
+	justify-content: space-between !important;
+	padding-bottom: 12px !important;
+	margin-bottom: 8px !important;
+	border-bottom: none !important;
+}
+
+.fc-checkout-order-review-title,
+#order_review_heading {
+	font-family: var(--spada-font-display) !important;
+	font-size: 16px !important;
+	font-weight: 700 !important;
+	text-transform: uppercase !important;
+	letter-spacing: 0.5px !important;
+	color: var(--spada-dark) !important;
+	margin: 0 !important;
+	line-height: 1.2 !important;
+}
+
+.fc-cart-items-count {
+	font-family: var(--spada-font-body) !important;
+	font-size: 14px !important;
+	color: var(--spada-muted) !important;
+	font-weight: 400 !important;
+}
+
+/* ==========================================================================
+   2. Main Table & Cart Items
+   ========================================================================== */
+
+table.spada-order-summary-table,
+.woocommerce-checkout-review-order-table.spada-order-summary-table {
+	width: 100% !important;
+	border: none !important;
+	border-collapse: collapse !important;
+	margin: 0 0 16px 0 !important;
+	font-family: var(--spada-font-body) !important;
+	background: transparent !important;
+}
+
+table.spada-order-summary-table tbody tr.spada-cart-item {
+	border-top: none !important;
+	border-bottom: none !important;
+	background: transparent !important;
+}
+
+.spada-cart-item-cell {
+	display: flex !important;
+	gap: 14px !important;
+	padding: 12px 0 !important;
+	border: none !important;
+	background: transparent !important;
+	width: 100% !important;
+	box-sizing: border-box !important;
+}
+
+/* Product Thumbnail */
+.spada-item-thumb {
+	flex: 0 0 68px !important;
+	width: 68px !important;
+	height: 68px !important;
+	background-color: #f3f4f6 !important;
+	border-radius: 8px !important;
+	overflow: hidden !important;
+	display: flex !important;
+	align-items: center !important;
+	justify-content: center !important;
+}
+
+.spada-item-thumb img {
+	width: 100% !important;
+	height: 100% !important;
+	object-fit: contain !important;
+	padding: 4px !important;
+	border: none !important;
+	box-shadow: none !important;
+}
+
+/* Product Content Details */
+.spada-item-details {
+	flex: 1 1 auto !important;
+	min-width: 0 !important;
+	display: flex !important;
+	flex-direction: column !important;
+	justify-content: space-between !important;
+}
+
+/* Top Line: Title & Subtotal */
+.spada-item-header {
+	display: flex !important;
+	align-items: flex-start !important;
+	justify-content: space-between !important;
+	gap: 8px !important;
+	margin-bottom: 2px !important;
+}
+
+.spada-item-title {
+	font-family: var(--spada-font-body) !important;
+	font-size: 14.5px !important;
+	font-weight: 700 !important;
+	color: var(--spada-dark) !important;
+	margin: 0 !important;
+	line-height: 1.3 !important;
+	flex: 1 1 auto !important;
+}
+
+.spada-item-subtotal {
+	font-family: var(--spada-font-body) !important;
+	font-size: 14.5px !important;
+	font-weight: 700 !important;
+	color: var(--spada-dark) !important;
+	white-space: nowrap !important;
+	text-align: right !important;
+}
+
+/* Middle Line: Pack Size / Variation Meta */
+.spada-item-meta {
+	font-family: var(--spada-font-body) !important;
+	font-size: 12.5px !important;
+	color: var(--spada-muted) !important;
+	margin-bottom: 6px !important;
+	line-height: 1.3 !important;
+}
+
+.spada-item-meta dl.variation {
+	margin: 0 !important;
+	display: flex !important;
+	gap: 6px !important;
+	flex-wrap: wrap !important;
+}
+
+.spada-item-meta dl.variation dt,
+.spada-item-meta dl.variation dd {
+	margin: 0 !important;
+	display: inline-block !important;
+	font-size: 12px !important;
+}
+
+/* Bottom Line: Unit Price & Stepper + Remove */
+.spada-item-footer {
+	display: flex !important;
+	align-items: center !important;
+	justify-content: space-between !important;
+	margin-top: 4px !important;
+}
+
+.spada-item-unit-price {
+	font-family: var(--spada-font-body) !important;
+	font-size: 13.5px !important;
+	font-weight: 600 !important;
+	color: var(--spada-dark) !important;
+}
+
+.spada-item-actions {
+	display: inline-flex !important;
+	align-items: center !important;
+	gap: 8px !important;
+}
+
+/* Stepper Pill */
+.spada-qty-stepper {
+	display: inline-flex !important;
+	align-items: center !important;
+	border: 1px solid #d1d5db !important;
+	border-radius: 9999px !important;
+	background: #ffffff !important;
+	padding: 2px 6px !important;
+	height: 30px !important;
+	box-sizing: border-box !important;
+}
+
+.spada-qty-btn {
+	background: none !important;
+	border: none !important;
+	font-size: 14px !important;
+	font-weight: 600 !important;
+	color: var(--spada-dark) !important;
+	cursor: pointer !important;
+	padding: 0 4px !important;
+	line-height: 1 !important;
+	outline: none !important;
+	transition: opacity 0.15s ease !important;
+}
+
+.spada-qty-btn:hover {
+	opacity: 0.65;
+}
+
+.spada-qty-btn:disabled {
+	opacity: 0.3 !important;
+	cursor: not-allowed !important;
+}
+
+.spada-qty-input {
+	width: 26px !important;
+	border: none !important;
+	background: transparent !important;
+	text-align: center !important;
+	font-family: var(--spada-font-body) !important;
+	font-size: 13px !important;
+	font-weight: 700 !important;
+	color: var(--spada-dark) !important;
+	padding: 0 !important;
+	margin: 0 !important;
+	outline: none !important;
+	-moz-appearance: textfield !important;
+}
+
+.spada-qty-input::-webkit-outer-spin-button,
+.spada-qty-input::-webkit-inner-spin-button {
+	-webkit-appearance: none !important;
+	margin: 0 !important;
+}
+
+/* Red Remove Button */
+.spada-remove-btn {
+	width: 30px !important;
+	height: 30px !important;
+	border: 1px solid #fca5a5 !important;
+	border-radius: 6px !important;
+	background-color: #ffffff !important;
+	display: inline-flex !important;
+	align-items: center !important;
+	justify-content: center !important;
+	color: #ef4444 !important;
+	cursor: pointer !important;
+	transition: all 0.2s ease !important;
+	text-decoration: none !important;
+	box-sizing: border-box !important;
+}
+
+.spada-remove-btn:hover {
+	background-color: #fee2e2 !important;
+	border-color: #ef4444 !important;
+	color: #dc2626 !important;
+}
+
+/* ==========================================================================
+   3. Add More Products Button
+   ========================================================================== */
+
+.spada-add-more-cell {
+	padding: 14px 0 6px 0 !important;
+	border: none !important;
+	background: transparent !important;
+}
+
+.spada-add-more-btn {
+	display: inline-flex !important;
+	align-items: center !important;
+	gap: 12px !important;
+	text-decoration: none !important;
+	cursor: pointer !important;
+}
+
+.spada-add-more-box {
+	width: 44px !important;
+	height: 44px !important;
+	border: 1.5px solid var(--spada-teal) !important;
+	border-radius: 8px !important;
+	background-color: var(--spada-teal-soft) !important;
+	display: flex !important;
+	align-items: center !important;
+	justify-content: center !important;
+	color: var(--spada-teal) !important;
+	transition: transform 0.15s ease, background-color 0.15s ease !important;
+}
+
+.spada-add-more-btn:hover .spada-add-more-box {
+	background-color: #cffafe !important;
+	transform: scale(1.04);
+}
+
+.spada-add-more-label {
+	font-family: var(--spada-font-button) !important;
+	font-size: 15px !important;
+	font-weight: 500 !important;
+	color: var(--spada-teal) !important;
+	text-decoration: none !important;
+}
+
+.spada-add-more-btn:hover .spada-add-more-label {
+	color: var(--spada-teal-hover) !important;
+}
+
+/* ==========================================================================
+   4. Divider
+   ========================================================================== */
+
+.spada-divider-cell {
+	padding: 10px 0 !important;
+	border: none !important;
+	background: transparent !important;
+}
+
+.spada-order-divider {
+	border: none !important;
+	border-top: 1px solid #e5e7eb !important;
+	margin: 6px 0 !important;
+	width: 100% !important;
+}
+
+/* ==========================================================================
+   5. Totals Breakdown Rows
+   ========================================================================== */
+
+table.spada-order-summary-table tfoot {
+	display: table-row-group !important;
+	border: none !important;
+	background: transparent !important;
+}
+
+.spada-summary-row th {
+	font-family: var(--spada-font-body) !important;
+	font-size: 13.5px !important;
+	font-weight: 500 !important;
+	color: #4b5563 !important;
+	padding: 7px 0 !important;
+	text-align: left !important;
+	border: none !important;
+	background: transparent !important;
+}
+
+.spada-summary-row td {
+	font-family: var(--spada-font-body) !important;
+	font-size: 13.5px !important;
+	font-weight: 700 !important;
+	color: var(--spada-dark) !important;
+	padding: 7px 0 !important;
+	text-align: right !important;
+	border: none !important;
+	background: transparent !important;
+}
+
+.spada-remove-coupon-link {
+	margin-left: 6px;
+	color: #ef4444;
+	text-decoration: none;
+	font-weight: bold;
+}
+
+/* ==========================================================================
+   6. + Add Coupon Code
+   ========================================================================== */
+
+.spada-coupon-toggle-cell {
+	padding: 10px 0 6px 0 !important;
+	border: none !important;
+	background: transparent !important;
+}
+
+.spada-coupon-toggle-btn {
+	background: none !important;
+	border: none !important;
+	padding: 0 !important;
+	color: var(--spada-teal) !important;
+	font-family: var(--spada-font-body) !important;
+	font-size: 13.5px !important;
+	font-weight: 500 !important;
+	cursor: pointer !important;
+	display: inline-flex !important;
+	align-items: center !important;
+	gap: 4px !important;
+	outline: none !important;
+	transition: color 0.15s ease !important;
+}
+
+.spada-coupon-toggle-btn:hover {
+	color: var(--spada-teal-hover) !important;
+}
+
+.spada-coupon-toggle-icon {
+	font-weight: 700 !important;
+	font-size: 14px !important;
+}
+
+.spada-coupon-form-wrap {
+	margin-top: 10px;
+	max-width: 380px;
+}
+
+.spada-coupon-form-wrap.is-hidden {
+	display: none;
+}
+
+.spada-coupon-input-group {
+	display: flex;
+	gap: 8px;
+}
+
+.spada-coupon-input {
+	flex: 1;
+	border: 1px solid var(--spada-border);
+	border-radius: 6px;
+	padding: 8px 12px;
+	font-family: var(--spada-font-body);
+	font-size: 13px;
+	color: var(--spada-dark);
+	outline: none;
+	box-sizing: border-box;
+}
+
+.spada-coupon-input:focus {
+	border-color: var(--spada-teal);
+}
+
+.spada-coupon-apply-btn {
+	background-color: var(--spada-teal);
+	color: #ffffff;
+	border: none;
+	border-radius: 6px;
+	padding: 8px 16px;
+	font-family: var(--spada-font-button);
+	font-size: 13px;
+	cursor: pointer;
+	transition: background-color 0.15s ease;
+}
+
+.spada-coupon-apply-btn:hover {
+	background-color: var(--spada-teal-hover);
+}
+
+.spada-coupon-message {
+	font-family: var(--spada-font-body);
+	font-size: 12px;
+	margin-top: 6px;
+}
+
+.spada-coupon-message.is-success {
+	color: #059669;
+}
+
+.spada-coupon-message.is-error {
+	color: #dc2626;
+}
+
+.spada-coupon-message.is-hidden {
+	display: none;
+}
+
+/* ==========================================================================
+   7. Highlighted Bottom TOTAL Card
+   ========================================================================== */
+
+.spada-order-total-card-cell {
+	padding: 16px 0 6px 0 !important;
+	border: none !important;
+	background: transparent !important;
+}
+
+.spada-total-card {
+	background-color: var(--spada-bg-card) !important;
+	border-radius: 8px !important;
+	padding: 16px 20px !important;
+	display: flex !important;
+	align-items: center !important;
+	justify-content: space-between !important;
+	width: 100% !important;
+	box-sizing: border-box !important;
+}
+
+.spada-total-card-label {
+	font-family: var(--spada-font-display) !important;
+	font-size: 17px !important;
+	font-weight: 700 !important;
+	letter-spacing: 0.5px !important;
+	color: var(--spada-dark) !important;
+	text-transform: uppercase !important;
+}
+
+.spada-total-card-amount {
+	font-family: var(--spada-font-display) !important;
+	font-size: 18px !important;
+	font-weight: 700 !important;
+	color: var(--spada-dark) !important;
+}
+
+.spada-total-card-amount .amount {
+	color: var(--spada-dark) !important;
+	font-family: var(--spada-font-display) !important;
+	font-size: 18px !important;
+	font-weight: 700 !important;
+}
+
+/* Loading Overlay on table */
+.spada-order-summary-table.is-loading {
+	opacity: 0.55;
+	pointer-events: none;
+	transition: opacity 0.2s ease;
+}
+
+/* ==========================================================================
+   8. RTL Support (Arabic)
+   ========================================================================== */
+
+body.rtl .spada-item-subtotal,
+html[dir="rtl"] .spada-item-subtotal {
+	text-align: left !important;
+}
+
+body.rtl .spada-summary-row th,
+html[dir="rtl"] .spada-summary-row th {
+	text-align: right !important;
+}
+
+body.rtl .spada-summary-row td,
+html[dir="rtl"] .spada-summary-row td {
+	text-align: left !important;
+}
+
+body.rtl .spada-remove-coupon-link,
+html[dir="rtl"] .spada-remove-coupon-link {
+	margin-left: 0;
+	margin-right: 6px;
+}

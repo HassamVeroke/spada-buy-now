@@ -37,6 +37,9 @@ require_once SPADA_CORE_PATH . 'includes/authentication/class-spada-auth.php';
 // Load My Account customization module
 require_once SPADA_CORE_PATH . 'includes/my-account/class-spada-my-account.php';
 
+// Load Fluid Checkout Order Summary customization module
+require_once SPADA_CORE_PATH . 'includes/fluid-checkout/class-spada-fc-order-summary.php';
+
 // Initialize Buy Now instance
 Spada_Buy_Now::instance();
 
@@ -45,5 +48,6 @@ add_action( 'plugins_loaded', function() {
 	if ( class_exists( 'WooCommerce' ) ) {
 		Spada_Auth::init();
 		Spada_My_Account::init();
+		Spada_FC_Order_Summary::init();
 	}
 }, 20 );

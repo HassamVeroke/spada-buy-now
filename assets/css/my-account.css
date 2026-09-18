@@ -17,14 +17,6 @@
 }
 
 /* My Account Container */
-.woocommerce-account .woocommerce {
-	max-width: 1200px;
-	margin: 40px auto;
-	padding: 0 16px;
-	font-family: var(--spada-font-body);
-}
-
-/* Welcome Banner */
 .spada-account-welcome-banner {
 	background: #ffffff;
 	border: 1px solid var(--spada-border);

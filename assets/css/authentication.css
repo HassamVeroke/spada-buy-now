@@ -36,6 +36,14 @@
 	display: none !important;
 }
 
+.spada-auth-wrapper button {
+	background-color: transparent;
+	font-family: 'Inter', sans-serif;
+	font-weight: 600;
+	font-size: 28px;
+	line-height: 26px;
+}
+
 /* 2. Main Portal Card (Blends directly into Elementor's white curved sheet) */
 .spada-auth-card {
 	background: transparent;
@@ -104,9 +112,8 @@ body.rtl .spada-back-btn:hover {
 .spada-choice-grid {
 	display: flex;
 	align-items: center;
-	justify-content: center;
-	gap: 20px;
-	padding: 24px 0 16px 0;
+	justify-content: space-between;
+	gap: 10px;
 	width: 100%;
 }
 
@@ -534,7 +541,6 @@ body.rtl .spada-back-btn:hover {
 
 	.spada-choice-grid {
 		flex-direction: row;
-		gap: 12px;
 	}
 
 	.spada-choice-card {
